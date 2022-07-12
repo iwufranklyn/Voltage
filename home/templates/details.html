@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+
+{% block title %} |  {{detail.title|title }} Details {% endblock title %}
+
+<!-- header -->
+{% block header %}  {% include "header.html" %} {% endblock header %}
+
+<!-- header done -->
+
+ <!-- carousel -->
+{% block carousel %}  {% include "carousel.html" %}  {% endblock carousel %}
+<!-- carousel done -->
+
+<!-- content -->
+{% block content %} 
+<div class="col-10 col-sm-6 col-md-5 col-lg-4 col-xl-3 d-none d-sm-block m-auto pt-5 pb-5">
+    <div class="card">
+      <img src="{{detail.img.url}}" height="205" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Name: {{detail.name|title}}</h5>
+        <p class="card-text text-truncate">Price: {{detail.price|title}}</p>
+        <p class="card-text text-truncate">Description: {{detail.description|title}}</p>
+        <form action="{% url 'shopcart' %}" method="POST">
+        {% csrf_token %}
+          <input type="hidden" name="product_id" value="{{detail.id}}">
+          <input type="number" name="quantity" value="1" min="{{detail.min_quantity}}" max="{{detail.max_quantity}}" class="form-control shadow-none my-3 border-warning" style="width: 60px;">
+          <button type="submit" class="btn btn-warning text-white">Add to cart</button>
+        </form>
+      </div>
+    </div>
+  </div> {% endblock content %}
+<!-- content done -->
+
+<!-- about -->
+{% block about %}   {% endblock about %}
+<!-- about done -->
+
+<!-- contact -->
+{% block contact %}   {% endblock contact %}
+<!-- contact us done -->
+
+<!-- team -->
+{% block team %}  {% endblock team %}
+<!-- team done -->
+
+<!-- footer -->
+{% block footer %}  {% include "footer.html" %} {% endblock footer %}
+<!-- footer done -->

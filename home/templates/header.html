@@ -1,0 +1,80 @@
+{% load static %}
+ <!-- header -->
+ <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container">
+      <img src="{% static '' %}img/everydaysneakers.jpg" width="60" height="50" class="evrd" alt="">
+      <a class="navbar-brand text-white" href="{% url 'index' %}">Everyday Sneakers</a>
+      <!-- <img src="img/everydaysneakers.jpg" width="60" height="50" class="evrd" alt=""> -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <span class="navbar-toggler-icon bg-dark text-white"></span> -->
+        <i class="fas fa-bars"></i>
+        
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <p id="home"><a class="nav-link text-white" href="{% url 'products' %}">Product</a></p>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Brand
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item text-white" href="nike.html">Nike <img src="{% static '' %}img/nike.jpg" width="50" height="20" class="nike" alt=""></a></li>
+              <li><a class="dropdown-item text-white" href="adidas.html">Adidas <img src="{% static '' %}img/adidas.webp" width="40" height="20" class="adidas" alt=""></a></li>
+              <!-- <li><hr class="dropdown-divider"></li> -->
+              <li><a class="dropdown-item text-white" href="#">Puma <img src="{% static '' %}img/puma.png" width="40" height="20" class="puma" alt=""></a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+           <p id="home"> <a class="nav-link text-white" href="#contact"> Contact</a></p>
+          </li>
+          <li class="nav-item">
+           <p id="home"> <a class="nav-link text-white" href="#team"> Team</a></p>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="{% url 'profile' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item text-white" href="{% url 'profile' %}">Profile</a></li>
+              <li><a class="dropdown-item text-white" href="{% url 'displaycart' %}">Shopcart</a></li>
+              <li><a class="dropdown-item text-white" href="{% url 'signout' %}">Signout</a></li>
+              <li><a class="dropdown-item text-white" href="{% url 'signin' %}">Signin</a></p></li>
+              <!-- <li><hr class="dropdown-divider"></li> -->
+              <li><a class="dropdown-item text-white" href="{% url 'signup' %}">Signup</a></li>
+              {% comment %} <li class="nav-item">
+                <p id="home"><a class="nav-link text-white" href="{% url 'profile' %}">Profile</a></p>
+              </li>
+              <li class="nav-item">
+                <p id="home"><a class="nav-link text-white" href="{% url 'signout' %}">Signout</a></p>
+              </li>
+              <li class="nav-item">
+                <p id="home"><a class="nav-link text-white" href="{% url 'signin' %}">Signin</a></p>
+              </li>
+              <li class="nav-item">
+                <p id="home"><a class="nav-link text-white" href="{% url 'signup' %}">Signup</a></p>
+              </li> {% endcomment %}
+            </ul>
+          </li>    
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success serch" type="submit"><i class="fas fa-search text-white"></i></button>
+        
+        </form>
+      </div>
+    </div>
+  </nav>
+    {% if messages %}
+      {% for item in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>{{item}}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+     {% endfor %}
+   {% endif %}
+  <!-- header done -->

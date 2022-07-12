@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %} |home {% endblock title %}
+
+ <!-- header -->
+ {% block header %} {% include "header.html" %} {% endblock header %}
+
+ <!-- header done -->
+
+  <!-- carousel -->
+ {% block carousel %} {% include "carousel.html" %}{% endblock carousel %}
+ <!-- carousel done -->
+
+
+{% block content %}
+<div class="container-fluid bg-dark container11">
+  <h1>latest footwears</h1>
+  <div class="row justify-content-center text-dark text-center gy-5">
+
+    
+    {% if frank %}
+      {% for f in frank %}
+        <!-- -->
+    <div class="col-10 col-sm-6 col-md-5 col-lg-4 col-xl-3 d-none d-sm-block">
+      <div class="card">
+        <img src="{{f.img.url}}" height="205" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Name: {{f.name}}</h5>
+          <p class="card-text text-truncate">Price: {{f.price}}</p>
+          <p class="card-text text-truncate">Description: {{f.description}}</p>
+          <a href="nike.html" class="btn btn-warning text-white"><i class="fas fa-eye"></i> View more</a>
+        </div>
+      </div>
+    </div>
+    <!-- -->
+      {% endfor %}
+    {% endif %}
+      
+    <!-- -->
+    <!-- <div class="col-10 col-sm-6 col-md-5 col-lg-4 col-xl-3 d-none d-sm-block">
+      <div class="card">
+        <img src="img/shoe1.avif" height="205" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Nike Air Force 1...</h5>
+          <p class="card-text text-truncate">#25,010.45...</p>
+          <a href="nike.html" class="btn btn-warning text-white"><i class="fas fa-eye"></i> View more</a>
+        </div>
+      </div>
+    </div> -->
+    <!-- -->
+   
+  </div>
+</div>
+{% endblock content %}
+
+<!-- about -->
+{% block about %} {% include "about.html" %}  {% endblock about %}
+<!-- about done -->
+
+<!-- contact -->
+{% block contact %} {% include "contact.html" %}  {% endblock contact %}
+<!-- contact us done -->
+
+<!-- team -->
+{% block team %} {% include "team.html" %} {% endblock team %}
+<!-- team done -->
+
+ <!-- footer -->
+ {% block footer %} {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done -->
+
+

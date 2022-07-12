@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %} |  Signup Page {% endblock title %}
+
+<!-- header -->
+{% block header %} {% include "header.html" %} {% endblock header %}
+
+<!-- header done -->
+
+{% block carousel %}  {% include "carousel.html" %}  {% endblock carousel %} 
+
+{% block content %}
+     <!-- content -->
+     <div class="container mb-5">
+        <h1 class="cap pt-5 pb-5">user signup</h1>
+        <div class="row justify-content-center justify-content-md-around justify-content-lg-center text-center gy-5">
+            <!-- <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3">
+                <div class="card border-0">
+                    <img src="img/jef.jpg"  class="card-img-top rounded-circle w-75 mx-auto team-img">
+                    <div class="card-body">
+                      <h5 class="card-title text-truncate">NAME:JEFF</h5>
+                    </div>
+                  </div>
+            </div> -->
+            <div class="col-10 col-sm-10 col-md-5 col-lg-5 col-xl-5">
+                <div class=" profile-form px-lg-3 text-start">
+                    <form action="{% url 'signup' %}" method="POST">
+                    {% csrf_token %}
+                        <div class="mb-2">
+                            <div id="textHelp" class="form-text text-capitalize mt-3 form-text">
+                              to fast track your transaction, kindly signin or signup if you have an existing account.</div>
+                            <label for="exampleInputText1" class="form-label">username</label>  
+                            <input type="text" name="username" class="form-control" id="exampleInpuText1">    
+                        </div>
+                        <div class="mb-2">
+                          <label for="exampleInputPassword1" class="form-label">first name</label>
+                          <input type="text" name="first_name" class="form-control" id="exampleInputText1">
+                          <div id=""></div>
+                        </div>
+                        <div class="mb-2">
+                          <label for="exampleInputPassword1" class="form-label">last name</label>
+                          <input type="text" name="last_name" class="form-control" id="exampleInputText1">
+    
+                        </div>
+                        <div class="mb-2">
+                          <label for="exampleInputPassword1" class="form-label">email</label>
+                          <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        
+                        </div>
+                        <div class="mb-2">
+                          <label for="exampleInputPassword1" class="form-label">phone number</label>
+                          <input type="text" name="phone" class="form-control" id="exampleInputEmail1">
+          
+                        </div>
+                          <div class="mb-2">
+                            <label for="exampleInputPassword1" class="form-label">address</label>
+                            <input type="text" name="address" class="form-control" id="exampleInputEmail1">
+                  
+                          </div>
+                          <div class="mb-2">
+                            <label for="exampleInputPassword1" class="form-label">state</label>
+                            <input type="text" name="state" class="form-control" id="exampleInputEmail1">
+                            <input type="text" name="pix" value="profile/avatar.png" class="form-control" id="exampleInputEmail1">
+            
+                          </div>
+                        <div class="mb-2">
+                          <label for="exampleInputPassword1" class="form-label">password</label>
+                          <input type="password" name="password1" class="form-control" id="exampleInputEmail1">
+                          <div id=""></div>
+                        </div>    
+                        <div class="mb-2">
+                          <label for="exampleInputPassword1" class="form-label"> repeat password</label>
+                          <input type="password" name="password2" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div id="textHelp"  class="form-text text-capitalize mb-3 form-text">
+                          signup to create an account or signin if you already have an one.
+                        </div>
+                        <button type="submit" class="btn btn-danger mt-4">Signup</button>
+                    </form>
+                    <a href="{% url 'signin' %}" type="submit" class="btn btn-danger mt-4">signin</a>
+                    <div id="emailHelp" class="form-text">Password should be at least 8 characters long.</div>
+                    <div id="emailHelp" class="form-text">Password should not be similar to your username and email.</div>
+                    <div id="emailHelp" class="form-text">Can be a combination of alphabets, numbers and special characters.</div>
+                </div>
+            </div>
+            <!-- <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3">
+                <div class="card border-0">
+                    <img src="img/jef.jpg"  class="card-img-top rounded-circle w-75 mx-auto team-img">
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block footer %}   {% include "footer.html" %}  {% endblock footer %}  
+      

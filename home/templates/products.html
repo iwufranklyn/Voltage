@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} | Product {% endblock title %}
+
+ <!-- header -->
+ {% block header %} {% include "header.html" %} {% endblock header %}
+
+ <!-- header done -->
+
+  <!-- carousel -->
+ {% block carousel %} {% include "carousel.html" %}{% endblock carousel %}
+ <!-- carousel done -->
+
+ {% block content %}
+ <br><br>
+    <div class="container">
+        <div class="row">
+            {% if product %}
+                {% for item in product %}
+                <div class="col-10 col-sm-6 col-md-5 col-lg-4 col-xl-3 d-none d-sm-block ms-5">
+                    <div class="card">
+                    <img src="{{item.img.url}}" height="205" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Name: {{item.name}}</h5>
+                        <p class="card-text text-truncate">Price: {{item.price}}</p>
+                        <p class="card-text text-truncate">Description: {{item.description}}</p>
+                        <a href="{% url 'details' item.id %}" class="btn btn-warning text-white"><i class="fas fa-eye"></i> View more</a>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+    </div>
+    <br><br>
+      
+
+ {% endblock content %}
+
+ <!-- footer -->
+ {% block footer %} {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done -->

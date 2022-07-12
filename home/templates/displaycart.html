@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} | Product {% endblock title %}
+
+ <!-- header -->
+ {% block header %} {% include "header.html" %} {% endblock header %}
+
+ <!-- header done -->
+
+  <!-- carousel -->
+ {% block carousel %} {% include "carousel.html" %}{% endblock carousel %}
+ <!-- carousel done -->
+
+ {% block content %}
+
+ <div class="container my-5">
+    <div class="row">
+        <div class=" table-responsive table-box">
+            <table class="table">
+                <thead>
+                    <tr class="fr">
+                        <th scope="col">delete</th>
+                        <th scope="col">image</th>
+                        <th scope="col">item</th>
+                        <th scope="col">$ price</th>
+                        <th scope="col">quantity</th>
+                        <th scope="col">update</th>
+                        <th scope="col">$ amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if trolley %}
+                        {% for item in trolley %}
+                            <tr class="fra">
+                                <th scope="row">
+                                    <form action="{% url 'deleteitem' %}" method="POST">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="item_id" value="{{item.id}}">
+                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this item?')" class="border-0"><i class="fas fa-trash delete"></i></button></th>    
+                                    </form>
+                                <td><img src="{{item.products.img.url}}" style="width: 60px;"></td>
+                                <td>{{item.name_id}}</td>
+                                <td>{{item.price|floatformat:2|intcomma}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>
+                                    <form action="{% url 'increase' %}" method="POST">
+                                    {% csrf_token %}
+                                        <input type="hidden" name="itemid" value="{{item.id}}">
+                                        <input type="number" min="{{item.product.min_quantity}}" name="quant" value="1" max="{{item.product.max_quantity}}" style="width: 50px;">
+                                        <button type="submit" onclick="return confirm('Modify quantity?')" class="border-0 bg-white text-success"><i class="fa-solid fa-circle-check"></i></button>
+                                    </form>
+                                </td>
+                                <td>{{item.amount|floatformat:2|intcomma}}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- {% comment %} <tr class="fra">
+                        <th scope="row"><button type="submit" class="border-0"><i class="fas fa-trash delete"></i></button></th>
+                        <td><img src="img/shoe1.avif" style="width: 60px;"></td>
+                        <td>air force 1</td>
+                        <td>200</td>
+                        <td>1</td>
+                        <td><input type="number" min="1" value="1" max="100" style="width: 50px;"></td>
+                        <td>200</td>
+                    </tr> {% endcomment %} -->
+                    <!-- {% comment %} <tr class="fra">
+                        <th scope="row"><button type="submit" class="border-0"><i class="fas fa-trash delete"></i></button></th>
+                        <td><img src="img/nike air max 90G.webp" style="width: 60px;"></td>
+                        <td>nike air max 90g</td>
+                        <td>500</td>
+                        <td>2</td>
+                        <td><input type="number" min="1" value="1" max="100" style="width: 50px;"></td>
+                        <td>1000</td>
+                    </tr>
+                    <tr class="fra">
+                        <th scope="row"><button type="submit" class="border-0"><i class="fas fa-trash delete"></i></button></th>
+                        <td><img src="img/nike court air zoom.webp" style="width: 60px;"></td>
+                        <td>nike court air zoom</td>
+                        <td>2000</td>
+                        <td>1</td>
+                        <td><input type="number" min="1" value="1" max="100" style="width: 50px;"></td>
+                        <td>2000</td>
+                    </tr>
+                    <tr class="fra">
+                        <th scope="row"><button type="submit" class="border-0"><i class="fas fa-trash delete"></i></button></th>
+                        <td><img src="img/nike metcon 7.webp" style="width: 60px;"></td>
+                        <td>nike metcon</td>
+                        <td>300</td>
+                        <td>1</td>
+                        <td><input type="number" min="1" value="1" max="100" style="width: 50px;"></td>
+                        <td>300</td>
+                    </tr> {% endcomment %} -->
+                </tbody>
+            </table>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>subtotal:{{subtotal|floatformat:2|intcomma}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td> vat:(7.5%):{{vat|floatformat:2|intcomma}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>total:{{total|floatformat:2|intcomma}}</td>
+                    </tr>
+                </tbody>
+                    
+            </table>
+        </div>
+        <!-- <div><button type="submit" class="btn order">Place order</button></div> -->
+
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button bg-secondary text-white checkbtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      checkout
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <h4 class="check-title mb-3">order summary</h4>
+                                        <div class=" table-responsive table-box text-danger">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Image</th>
+                                                        <th scope="col">$ Price</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="checkout1">
+
+                                                    
+                                                </tbody>
+                                            </table>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed bg-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Delivery address
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="accordion-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <h4 class="check-title mb-3">Delivery Address</h4>
+                                        <div class="form-box px-lg-5 mb-3">
+                                            <form action="{% url 'pay' %}" method="POST">
+                                            {% csrf_token %}    
+                                                <div class="mb-3">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">first name</label>
+                                                        <input type="text" name="first_name" value="{{profile.first_name}}" class="form-control" id="exampleInputPassword1">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">last name</label>
+                                                        <input type="text" name="last_name" value="{{profile.last_name}}" class="form-control" id="exampleInputPassword1">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                                        <input type="email" name="email" value="{{profile.email}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <div id="emailHelp" class="form-text"></div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Phone</label>
+                                                        <input type="text" name="phone" value="{{profile.phone}}" class="form-control" id="exampleInputPassword1">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">address</label>
+                                                        <input type="text" name="address" value="{{profile.address}}" class="form-control" id="exampleInputPassword1">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">state</label>
+                                                        <input type="text" name="state" value="{{profile.state}}" class="form-control" id="exampleInputPassword1">
+                                                        <input type="hidden" name="total" value="{{total}}">
+                                                    </div>
+                                                    <button type="submit" class="btn order">Place order</button>
+                                                </div>    
+                                            </form>
+                                        </div>     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ {% endblock content %}
+
+ <!-- footer -->
+ {% block footer %} {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done -->
